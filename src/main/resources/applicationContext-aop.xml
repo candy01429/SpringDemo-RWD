@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                            http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+                            http://www.springframework.org/schema/aop 
+                            http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+    
+    <bean id="weapon" class="com.di.Gun" /> <!--Spring 將自動建立Gun物件,稱bean元件,id為weapon-->
+    <bean id="mySoldier" class="com.di.MySoldierOK" > <!--Spring 將自動建立MySoldierOK物件,id為mySoldier-->
+        <constructor-arg ref="weapon" /> <!--Spring 將由其管控的bean元件中找到合適的自動關聯注入-->
+    </bean>
+    <bean id="alertAspectBean" class="com.aop.Alert" />
+    <aop:config>
+        <aop:pointcut id="alertPointcut" expression="execution(* com.og.Soldier.destoryTarget(..))" />
+        <aop:aspect id="alertAspect" ref ="alertAspectBean">
+            <aop:before pointcut-ref="alertPointcut" method="beforeAttack" />
+            <aop:after pointcut-ref="alertPointcut" method="afterAttack" />
+        </aop:aspect>
+    </aop:config>
+              
+</beans>

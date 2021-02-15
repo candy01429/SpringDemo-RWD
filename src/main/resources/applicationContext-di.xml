@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="weapon" class="ch18.di.Gun" /> <!--Spring 將自動建立Gun物件,稱bean元件,id為weapon-->
+	<bean id="mySoldier" class="ch18.di.MySoldierOK"> <!--Spring 將自動建立MySoldierOK物件,id為mySoldier-->
+		<constructor-arg ref="weapon" /><!--Spring 將由其管控的bean元件中找到合適的自動關聯注入-->
+	</bean>
+</beans>
+		
